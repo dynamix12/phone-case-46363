@@ -6,7 +6,10 @@ import Stripe from "stripe";
 import { Resend } from "resend";
 import OrderReceivedEmail from "@/components/emails/OrderReceivedEmail";
 
-const resend = new Resend(process.env.RESEND_API_KEY);
+// Initialize Resend only if API key is available
+const resend = process.env.RESEND_API_KEY
+  ? new Resend(process.env.RESEND_API_KEY)
+  : null;
 
 export async function POST(req: Request) {
   try {
@@ -71,24 +74,29 @@ export async function POST(req: Request) {
         },
       });
 
-      await resend.emails.send({
-        from: "CaseCobra <hello@joshtriedcoding.com>",
-        to: [event.data.object.customer_details.email],
-        subject: "Thanks for your order!",
-        react: OrderReceivedEmail({
-          orderId,
-          orderDate: updatedOrder.createdAt.toLocaleDateString(),
-          // @ts-ignore
-          shippingAddress: {
-            name: session.customer_details!.name!,
-            city: shippingAddress!.city!,
-            country: shippingAddress!.country!,
-            postalCode: shippingAddress!.postal_code!,
-            street: shippingAddress!.line1!,
-            state: shippingAddress!.state,
-          },
-        }),
-      });
+      // Only send email if Resend is configured
+      if (resend) {
+        await resend.emails.send({
+          from: "CaseCobra <hello@joshtriedcoding.com>",
+          to: [event.data.object.customer_details.email],
+          subject: "Thanks for your order!",
+          react: OrderReceivedEmail({
+            orderId,
+            orderDate: updatedOrder.createdAt.toLocaleDateString(),
+            // @ts-ignore
+            shippingAddress: {
+              name: session.customer_details!.name!,
+              city: shippingAddress!.city!,
+              country: shippingAddress!.country!,
+              postalCode: shippingAddress!.postal_code!,
+              street: shippingAddress!.line1!,
+              state: shippingAddress!.state,
+            },
+          }),
+        });
+      } else {
+        console.log("Resend API key not configured - skipping email");
+      }
     }
 
     return NextResponse.json({ result: event, ok: true });
