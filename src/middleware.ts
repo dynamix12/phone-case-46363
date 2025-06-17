@@ -1,6 +1,11 @@
 import { NextRequest, NextResponse } from "next/server";
 
 export function middleware(request: NextRequest) {
+  // Skip middleware for Kinde auth routes to avoid interference
+  if (request.nextUrl.pathname.startsWith("/api/auth/")) {
+    return NextResponse.next();
+  }
+
   // Handle CORS preflight requests
   if (request.method === "OPTIONS") {
     return new Response(null, {
@@ -18,7 +23,7 @@ export function middleware(request: NextRequest) {
   // For all other requests, continue with the default behavior
   const response = NextResponse.next();
 
-  // Add CORS headers to all responses
+  // Add CORS headers to all responses (except auth routes)
   response.headers.set(
     "Access-Control-Allow-Origin",
     "https://kalin46363.shop"
@@ -34,6 +39,7 @@ export const config = {
     // - _next/static (static files)
     // - _next/image (image optimization files)
     // - favicon.ico (favicon file)
-    "/((?!_next/static|_next/image|favicon.ico).*)",
+    // - api/auth (Kinde auth routes)
+    "/((?!_next/static|_next/image|favicon.ico|api/auth).*)",
   ],
 };
