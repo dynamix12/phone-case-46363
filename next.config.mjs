@@ -3,6 +3,11 @@ const nextConfig = {
   images: {
     domains: ["utfs.io", "utfs.sh", "dwzfb2c1yx.ufs.sh"],
   },
+  env: {
+    KINDE_SITE_URL: "https://kalin46363.shop",
+    KINDE_POST_LOGOUT_REDIRECT_URL: "https://kalin46363.shop",
+    KINDE_POST_LOGIN_REDIRECT_URL: "https://kalin46363.shop/auth-callback",
+  },
   async headers() {
     return [
       {
@@ -11,7 +16,7 @@ const nextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: "*",
+            value: "https://kalin46363.shop",
           },
           {
             key: "Access-Control-Allow-Methods",
@@ -29,6 +34,18 @@ const nextConfig = {
           {
             key: "Access-Control-Max-Age",
             value: "86400",
+          },
+          {
+            key: "X-Content-Type-Options",
+            value: "nosniff",
+          },
+          {
+            key: "X-Frame-Options",
+            value: "DENY",
+          },
+          {
+            key: "X-XSS-Protection",
+            value: "1; mode=block",
           },
         ],
       },
