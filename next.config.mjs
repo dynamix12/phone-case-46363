@@ -14,6 +14,17 @@ const nextConfig = {
       process.env.KINDE_POST_LOGIN_REDIRECT_URL ??
       `https://${process.env.VERCEL_URL ?? "kalin46363.shop"}/auth-callback`,
   },
+  webpack: (config, { isServer }) => {
+    // Ignore Expo-specific modules that cause build issues in Next.js
+    config.resolve.fallback = {
+      ...config.resolve.fallback,
+      "expo-secure-store": false,
+      "expo-constants": false,
+      "@expo/vector-icons": false,
+    };
+
+    return config;
+  },
   async headers() {
     return [
       {
