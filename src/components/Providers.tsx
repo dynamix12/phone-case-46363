@@ -18,7 +18,11 @@ const Providers = ({ children }: { children: ReactNode }) => {
   );
 
   return (
-    <KindeProvider>
+    <KindeProvider
+      onRedirectCallback={(user: any, appState: any) => {
+        console.log("Kinde redirect callback:", { user, appState });
+      }}
+    >
       <QueryClientProvider client={queryClient}>{children}</QueryClientProvider>
     </KindeProvider>
   );
