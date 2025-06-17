@@ -19,7 +19,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={recursive.className}>
+      <body className={recursive.className} suppressHydrationWarning={true}>
         <Providers>
           <ClientNavbar />
 
