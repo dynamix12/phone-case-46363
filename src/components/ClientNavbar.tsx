@@ -10,15 +10,42 @@ import { useEffect, useState } from "react";
 const ClientNavbar = () => {
   const { user, isAuthenticated, isLoading } = useKindeBrowserClient();
   const [mounted, setMounted] = useState(false);
+  const [serverAuthState, setServerAuthState] = useState<{
+    isAuthenticated: boolean;
+    user: any;
+    isAdmin: boolean;
+  } | null>(null);
 
   useEffect(() => {
     setMounted(true);
+
+    // Check server-side authentication state
+    const checkServerAuth = async () => {
+      try {
+        const response = await fetch("/api/auth/check-session");
+        if (response.ok) {
+          const data = await response.json();
+          setServerAuthState(data);
+        }
+      } catch (error) {
+        console.log("Failed to check server auth state:", error);
+      }
+    };
+
+    checkServerAuth();
   }, []);
 
-  const isAdmin = user?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL;
+  // Use server auth state if client state is not available
+  const effectiveIsAuthenticated =
+    isAuthenticated || serverAuthState?.isAuthenticated || false;
+  const effectiveUser = user || serverAuthState?.user || null;
+  const isAdmin =
+    effectiveUser?.email === process.env.NEXT_PUBLIC_ADMIN_EMAIL ||
+    serverAuthState?.isAdmin ||
+    false;
 
-  // Don't render anything until the component is mounted and authentication is checked
-  if (!mounted || isLoading) {
+  // Show loading state while checking authentication
+  if (!mounted || (isLoading && !serverAuthState)) {
     return (
       <nav className="sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
         <MaxWidthWrapper>
@@ -44,7 +71,7 @@ const ClientNavbar = () => {
           </Link>
 
           <div className="h-full flex items-center space-x-4">
-            {isAuthenticated && user ? (
+            {effectiveIsAuthenticated && effectiveUser ? (
               <>
                 <Link
                   href="/api/auth/logout"
