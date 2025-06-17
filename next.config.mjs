@@ -4,16 +4,10 @@ const nextConfig = {
     domains: ["utfs.io", "utfs.sh", "dwzfb2c1yx.ufs.sh"],
   },
   env: {
-    // Prioritize VERCEL_URL for proper OAuth flow
-    KINDE_SITE_URL: process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "https://kalin46363.shop",
-    KINDE_POST_LOGOUT_REDIRECT_URL: process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}`
-      : "https://kalin46363.shop",
-    KINDE_POST_LOGIN_REDIRECT_URL: process.env.VERCEL_URL
-      ? `https://${process.env.VERCEL_URL}/auth-callback`
-      : "https://kalin46363.shop/auth-callback",
+    // Use custom domain as primary, Vercel URL as fallback for development
+    KINDE_SITE_URL: "https://kalin46363.shop",
+    KINDE_POST_LOGOUT_REDIRECT_URL: "https://kalin46363.shop",
+    KINDE_POST_LOGIN_REDIRECT_URL: "https://kalin46363.shop/auth-callback",
   },
   async headers() {
     return [
@@ -23,9 +17,7 @@ const nextConfig = {
         headers: [
           {
             key: "Access-Control-Allow-Origin",
-            value: process.env.VERCEL_URL
-              ? `https://${process.env.VERCEL_URL}`
-              : "https://kalin46363.shop",
+            value: "https://kalin46363.shop",
           },
           {
             key: "Access-Control-Allow-Methods",
