@@ -1,0 +1,3 @@
+[33m651a720[m[33m ([m[1;36mHEAD[m[33m -> [m[1;32mmain[m[33m, [m[1;31morigin/main[m[33m, [m[1;31morigin/HEAD[m[33m)[m New changes to images
+[33me7fa128[m EMERGENCY FIX: Remove withAuth middleware causing redirect loops - Replace with CORS-only middleware
+[33m6c718b4[m FINAL FIX: Use official Kinde withAuth middleware + minimal CORS for API routes - Fixes login_link_expired and CORS issues

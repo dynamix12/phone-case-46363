@@ -7,6 +7,7 @@ const AuthDebug = () => {
   const { user, isAuthenticated, isLoading, getToken } =
     useKindeBrowserClient();
   const [token, setToken] = useState<string | null>(null);
+  const [clientTimestamp, setClientTimestamp] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchToken = async () => {
@@ -21,6 +22,7 @@ const AuthDebug = () => {
     if (isAuthenticated) {
       fetchToken();
     }
+    setClientTimestamp(new Date().toLocaleTimeString());
   }, [isAuthenticated, getToken]);
 
   if (process.env.NODE_ENV !== "development") {
@@ -35,7 +37,7 @@ const AuthDebug = () => {
       <div>User ID: {user?.id || "None"}</div>
       <div>User Email: {user?.email || "None"}</div>
       <div>Token: {token ? "Present" : "None"}</div>
-      <div>Timestamp: {new Date().toLocaleTimeString()}</div>
+      <div>Timestamp: {clientTimestamp || ""}</div>
     </div>
   );
 };

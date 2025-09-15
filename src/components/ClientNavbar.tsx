@@ -51,7 +51,7 @@ const ClientNavbar = () => {
         <MaxWidthWrapper>
           <div className="flex h-14 items-center justify-between border-b border-zinc-200">
             <Link href="/" className="flex z-40 font-semibold">
-              case<span className="text-green-600">cobra</span>
+              case<span className="text-blue-800">russell</span>
             </Link>
             <div className="h-full flex items-center space-x-4">
               <div className="animate-pulse h-8 w-20 bg-gray-200 rounded"></div>
@@ -67,7 +67,7 @@ const ClientNavbar = () => {
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
           <Link href="/" className="flex z-40 font-semibold">
-            case<span className="text-green-600">cobra</span>
+            case<span className="text-blue-800">russell</span>
           </Link>
 
           <div className="h-full flex items-center space-x-4">
@@ -97,7 +97,8 @@ const ClientNavbar = () => {
                   href="/configure/upload"
                   className={buttonVariants({
                     size: "sm",
-                    className: "hidden sm:flex items-center gap-1",
+                    className:
+                      "hidden sm:flex items-center gap-1 bg-blue-800 hover:bg-blue-700 text-white",
                   })}
                 >
                   Create case
@@ -132,7 +133,8 @@ const ClientNavbar = () => {
                   href="/configure/upload"
                   className={buttonVariants({
                     size: "sm",
-                    className: "hidden sm:flex items-center gap-1",
+                    className:
+                      "hidden sm:flex items-center gap-1 bg-blue-800 hover:bg-blue-700 text-white",
                   })}
                 >
                   Create case
