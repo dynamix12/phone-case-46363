@@ -29,7 +29,7 @@ export default function RootLayout({
           </main>
 
           <Toaster />
-          <AuthDebug />
+          {/* <AuthDebug /> */}
         </Providers>
       </body>
     </html>

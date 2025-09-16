@@ -26,7 +26,7 @@ export default function Home() {
               <p className="mt-8 text-lg lg:pr-10 max-w-prose text-center lg:text-left text-balance md:text-wrap">
                 Capture your favorite memories with your own,{" "}
                 <span className="font-semibold">one-of-one</span> phone case.
-                CaseCobra allows you to protect your memories, not just your
+                CaseRussell allows you to protect your memories, not just your
                 phone case.
               </p>
 
@@ -138,13 +138,15 @@ export default function Home() {
               </div>
               <div className="text-lg leading-8">
                 <p>
-                  "The case feels durable and I even got a compliment on the
-                  design. Had the case for two and a half months now and{" "}
+                  I’ve been using this case for about two and a half months now,
+                  and it still looks great. The design is clear and vibrant, and
+                  I’ve even received compliments on it. With my previous case,
+                  the image started fading and turning yellow within just a few
+                  weeks, but this one has held up really well. It feels durable
+                  and{" "}
                   <span className="p-0.5 bg-slate-800 text-white">
-                    the image is super clear
+                    I’m very happy with it.
                   </span>
-                  , on the case I had before, the image started fading into
-                  yellow-ish color after a couple weeks. Love it."
                 </p>
               </div>
               <div className="flex gap-4 mt-2">
@@ -153,7 +155,7 @@ export default function Home() {
                   src="/users/user-1.png"
                   alt="user"
                 />
-                <div className="flex flex-col">
+                <div className="flex flex-row items-center gap-x-2">
                   <p className="font-semibold">Jonathan</p>
                   <div className="flex gap-1.5 items-center text-zinc-600">
                     <Check className="h-4 w-4 stroke-[3px] text-blue-800" />
@@ -173,24 +175,23 @@ export default function Home() {
                 <Star className="h-5 w-5 text-blue-800 fill-blue-800" />
               </div>
               <div className="text-lg leading-8">
-                <p>
-                  "I usually keep my phone together with my keys in my pocket
-                  and that led to some pretty heavy scratchmarks on all of my
-                  last phone cases. This one, besides a barely noticeable
-                  scratch on the corner,{" "}
+                <p className="relative z-10">
+                  I usually carry my phone in the same pocket as my keys, which
+                  has left deep scratches on all my previous cases. This one,
+                  however, still looks almost brand new after about six months
+                  of use—aside from a barely noticeable mark on the corner.{" "}
                   <span className="p-0.5 bg-slate-800 text-white">
-                    looks brand new after about half a year
+                    I’m really impressed with how well it’s held up.
                   </span>
-                  . I dig it."
                 </p>
               </div>
-              <div className="flex gap-4 mt-2">
+              <div className="flex gap-4 mt-[46px]">
                 <img
                   className="rounded-full h-12 w-12 object-cover"
                   src="/users/user-4.jpg"
                   alt="user"
                 />
-                <div className="flex flex-col">
+                <div className="flex flex-row items-center gap-x-2">
                   <p className="font-semibold">Josh</p>
                   <div className="flex gap-1.5 items-center text-zinc-600">
                     <Check className="h-4 w-4 stroke-[3px] text-blue-800" />

@@ -73,15 +73,15 @@ const ClientNavbar = () => {
           <div className="h-full flex items-center space-x-4">
             {effectiveIsAuthenticated && effectiveUser ? (
               <>
-                <Link
-                  href="/api/auth/logout"
+                <button
+                  onClick={() => window.location.assign("/api/auth/logout")}
                   className={buttonVariants({
                     size: "sm",
                     variant: "ghost",
                   })}
                 >
                   Sign out
-                </Link>
+                </button>
                 {isAdmin ? (
                   <Link
                     href="/dashboard"
