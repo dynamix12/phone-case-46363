@@ -54,11 +54,7 @@ const PhonePreview = ({
             "phone-skew relative z-20 rounded-t-[15px] rounded-b-[10px] md:rounded-t-[30px] md:rounded-b-[20px]",
             caseBackgroundColor
           )}
-          src={
-            croppedImageUrl.startsWith("data:image")
-              ? croppedImageUrl
-              : `data:image/png;base64,${croppedImageUrl}`
-          }
+          src={croppedImageUrl}
         />
       </div>
 
