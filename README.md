@@ -30,11 +30,41 @@ To get started with this project, run
 
 and copy the .env.example variables into a separate .env file, fill them out & and that's all you need to get started!
 
-
 ## Acknowledgements
 
-- [Kinde](https://link.joshtriedcoding.com/kinde) for making this project possible
+- Kinde for making this project possible
+- UploadThing for handling file uploads
+- Prisma for the database ORM
+- Stripe for payment processing
+- Resend for transactional emails
+
+## .env.example
+
+```dotenv
+# Kinde Auth
+KINDE_CLIENT_ID=''
+KINDE_CLIENT_SECRET=''
+KINDE_ISSUER_URL=''
+KINDE_SITE_URL='http://localhost:3000'
+KINDE_AUDIENCE=''
+KINDE_POST_LOGOUT_REDIRECT_URL='http://localhost:3000'
+KINDE_POST_LOGIN_REDIRECT_URL='http://localhost:3000/auth-callback'
+
+# Prisma
+DATABASE_URL=''
+
+# UploadThing
+UPLOADTHING_SECRET=''
+UPLOADTHING_APP_ID=''
+
+# Stripe
+STRIPE_SECRET_KEY=''
+STRIPE_WEBHOOK_SECRET=''
+
+# Resend
+RESEND_API_KEY=''
+```
 
 ## License
 
-[MIT](https://choosealicense.com/licenses/mit/)
+MIT

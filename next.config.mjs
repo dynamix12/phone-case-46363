@@ -13,6 +13,8 @@ const nextConfig = {
     KINDE_POST_LOGIN_REDIRECT_URL:
       process.env.KINDE_POST_LOGIN_REDIRECT_URL ??
       `https://${process.env.VERCEL_URL ?? "kalin46363.shop"}/auth-callback`,
+    NEXT_PUBLIC_SERVER_URL:
+      process.env.NEXT_PUBLIC_SERVER_URL ?? `http://localhost:3000`,
   },
   webpack: (config, { isServer }) => {
     // Ignore Expo-specific modules that cause build issues in Next.js
