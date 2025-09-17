@@ -2,14 +2,8 @@
 
 import { db } from "@/db";
 import { getKindeServerSession } from "@kinde-oss/kinde-auth-nextjs/server";
-import { unstable_noStore as noStore } from "next/cache";
 
 export const getPaymentStatus = async ({ orderId }: { orderId: string }) => {
-  noStore();
-
-  // Add a small delay to account for potential database write delays
-  await new Promise((resolve) => setTimeout(resolve, 500));
-
   const { getUser } = getKindeServerSession();
   const user = await getUser();
 
@@ -27,9 +21,7 @@ export const getPaymentStatus = async ({ orderId }: { orderId: string }) => {
     },
   });
 
-  if (!order) {
-    throw new Error("This order does not exist.");
-  }
+  if (!order) throw new Error("This order does not exist.");
 
   if (order.isPaid) {
     return order;

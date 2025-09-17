@@ -5,6 +5,7 @@ import { NextResponse } from "next/server";
 import Stripe from "stripe";
 import { Resend } from "resend";
 import OrderReceivedEmail from "@/components/emails/OrderReceivedEmail";
+import { ShippingAddress } from "@prisma/client";
 
 // Initialize Resend only if API key is available
 const resend = process.env.RESEND_API_KEY
@@ -49,12 +50,20 @@ export async function POST(req: Request) {
         throw new Error("Invalid request metadata");
       }
 
+      console.log(
+        "Raw Stripe Session Shipping Details:",
+        session.shipping_details
+      );
+
       const billingAddress = session.customer_details?.address;
-      const shippingAddress = session.shipping_details?.address;
+      const shippingAddress =
+        session.shipping_details?.address || session.customer_details?.address; // Use customer_details address if shipping_details is undefined
       const customerName = session.customer_details?.name;
 
+      let updatedOrder = null; // Declare updatedOrder here
+
       try {
-        const updatedOrder = await db.order.update({
+        updatedOrder = await db.order.update({
           where: {
             id: orderId,
           },
@@ -87,6 +96,10 @@ export async function POST(req: Request) {
                 },
               }),
           },
+          include: {
+            shippingAddress: true,
+            billingAddress: true, // Include billing address as well
+          },
         });
         console.log("Order updated as paid in DB: ", updatedOrder.id);
       } catch (dbError) {
@@ -104,22 +117,15 @@ export async function POST(req: Request) {
           event.data.object.customer_details.email
         );
         await resend.emails.send({
-          from: "CaseCobra <hello@joshtriedcoding.com>",
+          from: "CaseRussell <onboarding@resend.dev>",
           to: [event.data.object.customer_details.email],
           subject: "Thanks for your order!",
           react: OrderReceivedEmail({
             orderId,
             orderDate: updatedOrder.createdAt.toLocaleDateString(),
-            shippingAddress: shippingAddress
-              ? {
-                  name: customerName!,
-                  city: shippingAddress.city!,
-                  country: shippingAddress.country!,
-                  postalCode: shippingAddress.postal_code!,
-                  street: shippingAddress.line1!,
-                  state: shippingAddress.state,
-                }
-              : undefined,
+            shippingAddress: updatedOrder.shippingAddress as
+              | ShippingAddress
+              | undefined,
           }),
         });
         console.log("Order received email sent successfully.");
