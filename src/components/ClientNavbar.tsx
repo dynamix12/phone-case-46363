@@ -50,7 +50,7 @@ const ClientNavbar = () => {
       <nav className="sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
         <MaxWidthWrapper>
           <div className="flex h-14 items-center justify-between border-b border-zinc-200">
-            <Link href="/" className="flex z-40 font-semibold">
+            <Link href="/" className="flex z-40 font-semibold text-xl">
               case<span className="text-blue-800">russell</span>
             </Link>
             <div className="h-full flex items-center space-x-4">
@@ -66,7 +66,7 @@ const ClientNavbar = () => {
     <nav className="sticky z-[100] h-14 inset-x-0 top-0 w-full border-b border-gray-200 bg-white/75 backdrop-blur-lg transition-all">
       <MaxWidthWrapper>
         <div className="flex h-14 items-center justify-between border-b border-zinc-200">
-          <Link href="/" className="flex z-40 font-semibold">
+          <Link href="/" className="flex z-40 font-semibold text-xl">
             case<span className="text-blue-800">russell</span>
           </Link>
 
@@ -98,7 +98,7 @@ const ClientNavbar = () => {
                   className={buttonVariants({
                     size: "sm",
                     className:
-                      "hidden sm:flex items-center gap-1 bg-blue-800 hover:bg-blue-700 text-white",
+                      "hidden sm:flex items-center gap-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 transition-all duration-300",
                   })}
                 >
                   Create case
@@ -134,7 +134,7 @@ const ClientNavbar = () => {
                   className={buttonVariants({
                     size: "sm",
                     className:
-                      "hidden sm:flex items-center gap-1 bg-blue-800 hover:bg-blue-700 text-white",
+                      "hidden sm:flex items-center gap-1 bg-gradient-to-r from-blue-600 to-purple-600 hover:from-blue-700 hover:to-purple-700 text-white border-0 transition-all duration-300",
                   })}
                 >
                   Create case
