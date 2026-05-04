@@ -7,6 +7,8 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
+    "stripe:listen": "stripe listen --forward-to http://localhost:3000/api/webhooks",
+    "stripe:listen:singular": "stripe listen --forward-to http://localhost:3000/api/webhook",
     "postinstall": "prisma generate",
     "postbuild": "node scripts/add-urls-to-kinde.js"
   },
